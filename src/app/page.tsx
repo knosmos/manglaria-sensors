@@ -15,7 +15,7 @@ declare global {
   }
 }
 
-mapboxgl.accessToken = "pk.eyJ1IjoiamllcnVlaSIsImEiOiJjbWE2NnUwOTQwcDcyMmtxOWhiMmc1MXd2In0.YMFp5MSoXxY5L7_2yy_UsQ";
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const center: [number, number] = [-87.8, 21.5];
 
 type SensorData = {
