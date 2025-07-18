@@ -39,7 +39,7 @@ export async function createMarkers() {
   }
   const data = await fetchCSVData();
   console.log(data);
-  let markers: mapboxgl.Marker[] = [];
+  const markers: mapboxgl.Marker[] = [];
   for (const sensor of data.data as SensorData[]) {
     if (sensor.Sensor === "Dron Lidar") {
       sensor.Sensor = "Drone Lidar"; // Correcting sensor name for consistency
@@ -142,8 +142,8 @@ export async function createMarkers() {
     if (markerLocations[position].length > 1) {
       const markersAtPosition = markerLocations[position];
       const markerLngLat = markersAtPosition[0].getLngLat();
-      let r = 0.0001; // small radius to shift markers
-      let theta_delta = (2 * Math.PI) / markersAtPosition.length;
+      const r = 0.0001; // small radius to shift markers
+      const theta_delta = (2 * Math.PI) / markersAtPosition.length;
       markersAtPosition.forEach((marker, index) => {
         const lngLat = marker.getLngLat();
         const newLng = lngLat.lng + r * Math.cos(index * theta_delta);
