@@ -20,7 +20,7 @@ export default function Sidebar() {
     "Weather Station",
   ];
   return (
-    <div className="font-mono absolute top-5 right-5 box-border bg-gray-200 p-4 shadow-lg rounded-lg max-w-100">
+    <div className="font-mono absolute top-5 right-5 box-border bg-gray-100/90 p-4 shadow-lg rounded-lg max-w-100 text-black">
       <h2 className="text-3xl font-bold font-sans tracking-tight">ManglarIA</h2>
       <hr />
       <p className="tracking-widest text-sm">SENSOR INVENTORY /////</p>
@@ -89,7 +89,13 @@ export default function Sidebar() {
           <br />
           dashboard v0.0.2
           <br />
-          by jieruei chang
+          by{" "}
+          <a
+            href="https://github.com/knosmos"
+            className="text-purple-800 hover:underline"
+          >
+            jieruei chang
+          </a>
           <br />
           built with{" "}
           <a

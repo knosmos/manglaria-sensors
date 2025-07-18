@@ -58,7 +58,7 @@ export async function createMarkers() {
       offset: 25,
       closeButton: false,
     }).setMaxWidth("100%").setHTML(`
-        <div class="font-mono">
+        <div class="font-mono text-black p-2">
           <h2 class="text-lg uppercase"><b>${sensor.Sensor}</b></h2>
           <h3 class="font-mono text-lg">${sensor["Site code"]}</h3>
           <hr>
