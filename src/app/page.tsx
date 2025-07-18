@@ -6,6 +6,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 import Sidebar from "./sidebar";
 import { createMarkers } from "./marker_load";
+import { create } from "domain";
 
 declare global {
   interface Window {

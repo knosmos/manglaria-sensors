@@ -23,7 +23,7 @@ export default function Sidebar() {
     <div className="font-mono absolute top-5 right-5 box-border bg-gray-200 p-4 shadow-lg rounded-lg max-w-100">
       <h2 className="text-3xl font-bold font-sans tracking-tight">ManglarIA</h2>
       <hr />
-      <p className="tracking-widest text-sm">SENSOR DASHBOARD /////</p>
+      <p className="tracking-widest text-sm">SENSOR INVENTORY /////</p>
       <br />
       <div>
         {categories.map((category, index) => (
