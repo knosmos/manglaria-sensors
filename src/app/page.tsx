@@ -5,6 +5,7 @@ import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 import Sidebar from "./sidebar";
+import { Polyline } from "./polyline";
 import { createMarkers } from "./marker_load";
 import { create } from "domain";
 
@@ -12,6 +13,8 @@ declare global {
   interface Window {
     mapboxMap?: mapboxgl.Map;
     selectedSensors?: string[];
+    sensorMarkers?: mapboxgl.Marker[];
+    sensorLines?: Polyline[];
   }
 }
 

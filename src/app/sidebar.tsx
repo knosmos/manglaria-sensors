@@ -20,7 +20,7 @@ export default function Sidebar() {
     "Weather Station",
   ];
   return (
-    <div className="font-mono absolute top-5 right-5 box-border bg-gray-100/90 p-4 shadow-lg rounded-lg max-w-100 text-black">
+    <div className="font-mono absolute top-5 right-5 box-border bg-gray-100/90 p-4 shadow-lg rounded-lg max-w-100 text-black z-5">
       <h2 className="text-3xl font-bold font-sans tracking-tight">ManglarIA</h2>
       <hr />
       <p className="tracking-widest text-sm">SENSOR INVENTORY /////</p>
@@ -72,6 +72,9 @@ export default function Sidebar() {
           </div>
         ))}
       </div>
+      <p className="mt-2 text-sm text-gray-400">
+        [click to toggle sensor types]
+      </p>
       <br />
       <details className="text-gray-500">
         <summary className="cursor-pointer hover:text-gray-700">About</summary>
@@ -87,9 +90,7 @@ export default function Sidebar() {
           climate
           <hr />
           <br />
-          dashboard v0.0.2
-          <br />
-          by{" "}
+          dashboard v0.0.3 by{" "}
           <a
             href="https://github.com/knosmos"
             className="text-purple-800 hover:underline"
@@ -111,6 +112,18 @@ export default function Sidebar() {
           >
             Mapbox
           </a>
+          <hr />
+          <br />
+          <div className="flex justify-stretch items-center space-x-4 mt-2 w-full">
+            <Image src="/wwf.svg" alt="WWF Logo" width={30} height={20} />
+            <div className="border-l border-gray-300 h-6"></div>
+            <Image
+              src="/google_org.png"
+              alt="Google.org Logo"
+              width={120}
+              height={20}
+            />
+          </div>
         </div>
       </details>
     </div>
