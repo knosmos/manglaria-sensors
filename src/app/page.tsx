@@ -1,103 +1,157 @@
-import Image from "next/image";
+'use client';
+
+import React, { useEffect } from "react";
+import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import * as Papa from "papaparse";
+
+import Sidebar from "./sidebar";
+import { create } from "domain";
+
+declare global {
+  interface Window {
+    mapboxMap?: mapboxgl.Map;
+    selectedSensors?: string[];
+  }
+}
+
+mapboxgl.accessToken = "pk.eyJ1IjoiamllcnVlaSIsImEiOiJjbWE2NnUwOTQwcDcyMmtxOWhiMmc1MXd2In0.YMFp5MSoXxY5L7_2yy_UsQ";
+const center: [number, number] = [-87.8, 21.5];
+
+type SensorData = {
+  Latitude: string;
+  Longitude: string;
+  ANP: string;
+  Location: string;
+  Manufacturer: string;
+  Model: string;
+  Sensor: string;
+  "Site code": string;
+  "Installation date": string;
+  "Installation status": string;
+};
+
+function fetchCSVData() {
+  return fetch("/sensor_coords.csv")
+    .then(response => response.text())
+    .then(data => Papa.parse(data, {
+      header: true,
+      skipEmptyLines: true,
+    }));
+}
+
+export async function createMarkers() {
+  if (window.mapboxMap) {
+    const existingMarkers = document.querySelectorAll('.mapboxgl-marker');
+    existingMarkers.forEach(marker => marker.remove());
+  }
+  const data = await fetchCSVData();
+  console.log(data);
+  for (const sensor of data.data as SensorData[]) {
+    if (sensor.Sensor === "Dron Lidar") {
+      sensor.Sensor = "Drone Lidar"; // Correcting sensor name for consistency
+    }
+    if (window.selectedSensors && !window.selectedSensors.includes(sensor.Sensor.toLowerCase())) {
+      console.log(`Skipping sensor: ${sensor.Sensor} (not selected)`);
+      continue;
+    }
+    const lat : number = parseFloat(sensor.Latitude);
+    const lng : number = parseFloat(sensor.Longitude);
+    if (isNaN(lat) || isNaN(lng)) {
+      console.warn(`Invalid coordinates for sensor: ${sensor.Latitude}, ${sensor.Longitude}`);
+      continue;
+    }
+    else {
+      console.log(`Adding marker at: ${lat}, ${lng}`);
+    }
+    const popup = new mapboxgl.Popup({ offset: 25, closeButton: false })
+      .setMaxWidth("100%")
+      .setHTML(`
+        <div class="font-mono">
+          <h2 class="text-lg uppercase"><b>${sensor.Sensor}</b></h2>
+          <h3 class="font-mono text-lg">${sensor["Site code"]}</h3>
+          <hr>
+          <p class="uppercase tracking-widest">${sensor.Location} /////</p>
+          <br>
+          <table class="w-full">
+            <tr>
+              <td class="text-gray-500 pr-2">ANP:</td>
+              <td class="text-gray-700">${sensor.ANP}</td>
+            </tr>
+            <tr>
+              <td class="text-gray-500 pr-2">Manufacturer:</td>
+              <td class="text-gray-700">${sensor.Manufacturer}</td>
+            </tr>
+            <tr>
+              <td class="text-gray-500 pr-2">Model:</td>
+              <td class="text-gray-700">${sensor.Model}</td>
+            </tr>
+            <tr>
+              <td class="text-gray-500 pr-2">Installation Date:</td>
+              <td class="text-gray-700">${sensor["Installation date"]}</td>
+            </tr>
+            <!--<tr>
+              <td class="text-gray-500 pr-2">Installation Status:</td>
+              <td class="text-gray-700">${sensor["Installation status"]}</td>
+            </tr>-->
+          </table>
+          <br>
+          <p class="text-gray-400">(${lat}, ${lng})</p>
+        </div>`
+      );
+    const el = document.createElement('div');
+    el.className = "w-10 h-10 rounded-full shadow-lg cursor-pointer";
+    el.style.backgroundSize = '100%';
+    el.style.display = 'block';
+    el.style.border = 'none';
+    const icon_name : string = sensor.Sensor.toLowerCase().replace(/\s+/g, "-");
+    el.style.backgroundImage = `url(sensor-icons/${icon_name}.png)`;
+    new mapboxgl.Marker(el)
+      .setLngLat([lng, lat])
+      .setPopup(popup)
+      .addTo(window.mapboxMap as mapboxgl.Map);
+  }
+}
+
+const Map = () => {
+  const mapRef = React.useRef<mapboxgl.Map | null>(null);
+  
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.selectedSensors = window.selectedSensors || [
+        "current profiler",
+        "drone lidar",
+        "flux tower",
+        "forest survey",
+        "soil sample",
+        "terrestrial camera",
+        "underwater datalogger",
+        "weather station"
+      ];
+      const map_object = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/satellite-v9",
+        center: center,
+        zoom: 10,
+      });
+      mapRef.current = map_object;
+      window.mapboxMap = map_object; // Expose map object globally for debugging
+      map_object.on("load", async () => {
+        createMarkers();
+      });
+    }
+  }, []);
+  return (
+    <div>
+      <div id="map" style={{ width: "100%", height: "100vh" }}>
+      </div>
+      <Sidebar />
+    </div>
+  )
+}
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <Map />
   );
 }
