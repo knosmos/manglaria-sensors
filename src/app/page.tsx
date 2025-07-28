@@ -8,6 +8,7 @@ import Sidebar from "./sidebar";
 import { Polyline } from "./polyline";
 import { createMarkers } from "./marker_load";
 import { create } from "domain";
+import Viewsetter from "./viewsetter";
 
 declare global {
   interface Window {
@@ -53,6 +54,7 @@ const Map = () => {
     <div>
       <div id="map" style={{ width: "100%", height: "100vh" }}></div>
       <Sidebar />
+      <Viewsetter />
     </div>
   );
 };

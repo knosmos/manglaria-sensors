@@ -88,10 +88,10 @@ export async function createMarkers() {
               <td class="text-gray-500 pr-2">Installation Date:</td>
               <td class="text-gray-700">${sensor["Installation date"]}</td>
             </tr>
-            <!--<tr>
-              <td class="text-gray-500 pr-2">Installation Status:</td>
+            <tr>
+              <td class="text-gray-500 pr-2">Status:</td>
               <td class="text-gray-700">${sensor["Installation status"]}</td>
-            </tr>-->
+            </tr>
           </table>
           <br>
           <p class="text-gray-400">(${lat}, ${lng})</p>
