@@ -28,7 +28,11 @@ function fetchCSVData() {
     );
 }
 
+let rebuilding = false;
+
 export async function createMarkers() {
+  if (rebuilding) return;
+  rebuilding = true;
   if (window.mapboxMap) {
     const existingMarkers = document.querySelectorAll(".mapboxgl-marker");
     existingMarkers.forEach((marker) => marker.remove());
@@ -187,4 +191,5 @@ export async function createMarkers() {
     }
   }
   window.sensorMarkers = markers;
+  rebuilding = false;
 }
