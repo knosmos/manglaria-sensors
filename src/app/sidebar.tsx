@@ -51,14 +51,14 @@ export default function Sidebar() {
                 );
                 if (label) {
                   label.className = e.target.checked
-                    ? "cursor-pointer text-black hover:line-through"
-                    : "cursor-pointer text-gray-400 line-through hover:no-underline hover:text-gray-500";
+                    ? "cursor-pointer text-black hover:text-purple-800"
+                    : "cursor-pointer text-gray-400 line-through hover:text-gray-500";
                 }
               }}
             />
             <label
               htmlFor={`category-${index}`}
-              className="cursor-pointer hover:line-through"
+              className="cursor-pointer text-black hover:text-purple-800"
             >
               <Image
                 src={`/sensor-icons/${category.toLowerCase().replace(/\s+/g, "-")}.png`}

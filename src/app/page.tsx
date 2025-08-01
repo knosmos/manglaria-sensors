@@ -39,7 +39,7 @@ const Map = () => {
       ];
       const map_object = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/jieruei/cmdqg6l5i024g01sadq52c3cb",
+        style: "mapbox://styles/jieruei/cmdqg6l5i024g01sadq52c3cb?optimize=true",
         center: center,
         zoom: 10,
       });
