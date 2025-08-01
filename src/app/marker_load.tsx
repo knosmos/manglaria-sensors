@@ -102,7 +102,7 @@ export async function createMarkers() {
         </div>`);
     const el = document.createElement("div");
     el.className =
-      "w-10 h-10 rounded-full shadow-lg cursor-pointer bg-size-[100%] block border-none z-1";
+      "w-7 h-7 rounded-full shadow-lg cursor-pointer bg-size-[100%] block border-none z-1";
     const icon_name: string = sensor.Sensor.toLowerCase().replace(/\s+/g, "-");
     el.style.backgroundImage = `url(sensor-icons/${icon_name}.png)`;
     markers.push(
@@ -146,39 +146,50 @@ export async function createMarkers() {
     if (markerLocations[position].length > 1) {
       const markersAtPosition = markerLocations[position];
       const markerLngLat = markersAtPosition[0].getLngLat();
-      const r = 0.0001; // small radius to shift markers
+      // const r = 0.0001; // small radius to shift markers
+      const r = 24; // px
       const theta_delta = (2 * Math.PI) / markersAtPosition.length;
       markersAtPosition.forEach((marker, index) => {
         const lngLat = marker.getLngLat();
-        const newLng = lngLat.lng + r * Math.cos(index * theta_delta);
-        const newLat = lngLat.lat + r * Math.sin(index * theta_delta);
-        marker.setLngLat([newLng, newLat]);
+        // const newLng = lngLat.lng + r * Math.cos(index * theta_delta);
+        // const newLat = lngLat.lat + r * Math.sin(index * theta_delta);
+        // marker.setLngLat([newLng, newLat]);
+        const x_shift = r * Math.cos(index * theta_delta);
+        const y_shift = r * Math.sin(index * theta_delta);
+        marker.getElement().style.left = `${x_shift}px`;
+        marker.getElement().style.top = `${y_shift}px`;
         // draw a line to the original position
-        const line = new Polyline({
-          id: `line-${position}-${index}`,
-          points: [
-            [lngLat.lng, lngLat.lat],
-            [newLng, newLat],
-          ],
-          layout: {
-            "line-join": "round",
-            "line-cap": "round",
-          },
-          paint: {
-            "line-color": "#ddd",
-            "line-width": 1.5,
-          },
-        });
-        line.addTo(window.mapboxMap as mapboxgl.Map);
-        if (!window.sensorLines) {
-          window.sensorLines = [];
-        }
-        window.sensorLines.push(line);
+        // const line = new Polyline({
+        //   id: `line-${position}-${index}`,
+        //   points: [
+        //     [lngLat.lng, lngLat.lat],
+        //     [newLng, newLat],
+        //   ],
+        //   layout: {
+        //     "line-join": "round",
+        //     "line-cap": "round",
+        //   },
+        //   paint: {
+        //     "line-color": "#ddd",
+        //     "line-width": 1.5,
+        //   },
+        // });
+        // line.addTo(window.mapboxMap as mapboxgl.Map);
+        // if (!window.sensorLines) {
+        //   window.sensorLines = [];
+        // }
+        // window.sensorLines.push(line);
       });
       // add circle at original position
       const circle_el = document.createElement("div");
       circle_el.className =
         "w-3 h-3 rounded-full shadow-lg cursor-pointer bg-size-[100%] block border-none bg-gray-300 z-0";
+      const large_circle_el = document.createElement("div");
+      large_circle_el.className =
+        "w-12 h-12 rounded-full shadow-lg cursor-pointer bg-size-[100%] block bg-gray-300/40 z-0";
+      const large_circle = new mapboxgl.Marker(large_circle_el)
+        .setLngLat(markerLngLat)
+        .addTo(window.mapboxMap as mapboxgl.Map)
       const circle = new mapboxgl.Marker(circle_el)
         .setLngLat(markerLngLat)
         .addTo(window.mapboxMap as mapboxgl.Map)
@@ -187,6 +198,7 @@ export async function createMarkers() {
             `<div class="font-mono text-black">Multiple sensors at this location</div>`,
           ),
         );
+      markers.push(large_circle);
       markers.push(circle);
     }
   }

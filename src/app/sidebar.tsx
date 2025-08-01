@@ -90,7 +90,7 @@ export default function Sidebar() {
           climate
           <hr />
           <br />
-          dashboard v0.0.3 by{" "}
+          dashboard v0.1.0 by{" "}
           <a
             href="https://github.com/knosmos"
             className="text-purple-800 hover:underline"
