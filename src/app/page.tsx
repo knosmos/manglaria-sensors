@@ -6,6 +6,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 import Sidebar from "./sidebar";
 import { Polyline } from "./polyline";
+import { sensorTypes } from "./sensor_types";
 import { createMarkers } from "./marker_load";
 import { create } from "domain";
 import Viewsetter from "./viewsetter";
@@ -27,19 +28,12 @@ const Map = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      window.selectedSensors = window.selectedSensors || [
-        "current profiler",
-        "drone lidar",
-        "flux tower",
-        "forest survey",
-        "soil sample",
-        "terrestrial camera",
-        "underwater datalogger",
-        "weather station",
-      ];
+      window.selectedSensors =
+        window.selectedSensors || sensorTypes.map((type) => type.toLowerCase());
       const map_object = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/jieruei/cmdqg6l5i024g01sadq52c3cb?optimize=true",
+        style:
+          "mapbox://styles/jieruei/cmdqg6l5i024g01sadq52c3cb?optimize=true",
         center: center,
         zoom: 10,
       });

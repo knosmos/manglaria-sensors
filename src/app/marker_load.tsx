@@ -65,11 +65,14 @@ export async function createMarkers() {
     } else {
       console.log(`Adding marker at: ${lat}, ${lng}`);
     }
+    const img = sensor["Site code"].toLowerCase().replace(/\s+/g, "-");
+    const imgPath = `/sensor-images/${img}.jpeg`;
     const popup = new mapboxgl.Popup({
       offset: 25,
       closeButton: false,
     }).setMaxWidth("100%").setHTML(`
         <div class="font-mono text-black">
+          <!--<img src="${imgPath}" alt="${sensor.Sensor} Icon" class="mb-2 rounded-md max-w-80" onerror="this.onerror=null; this.style.display='none';">-->
           <h2 class="text-lg uppercase"><b>${sensor.Sensor}</b></h2>
           <h3 class="font-mono text-lg">${sensor["Site code"]}</h3>
           <hr>
@@ -189,7 +192,7 @@ export async function createMarkers() {
         "w-12 h-12 rounded-full shadow-lg cursor-pointer bg-size-[100%] block bg-gray-300/40 z-0";
       const large_circle = new mapboxgl.Marker(large_circle_el)
         .setLngLat(markerLngLat)
-        .addTo(window.mapboxMap as mapboxgl.Map)
+        .addTo(window.mapboxMap as mapboxgl.Map);
       const circle = new mapboxgl.Marker(circle_el)
         .setLngLat(markerLngLat)
         .addTo(window.mapboxMap as mapboxgl.Map)

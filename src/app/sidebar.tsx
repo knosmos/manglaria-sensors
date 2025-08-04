@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { createMarkers } from "./marker_load";
+import { sensorTypes } from "./sensor_types";
 
 declare global {
   interface Window {
@@ -9,16 +10,7 @@ declare global {
 }
 
 export default function Sidebar() {
-  const categories = [
-    "Current Profiler",
-    "Drone Lidar",
-    "Flux Tower",
-    "Forest Survey",
-    "Soil Sample",
-    "Terrestrial Camera",
-    "Underwater Datalogger",
-    "Weather Station",
-  ];
+  const categories = sensorTypes;
   return (
     <div className="font-mono absolute top-5 right-5 box-border p-4 shadow-lg rounded-lg max-w-100 text-black z-5 bg-radial from-gray-100/80 from-20% to-gray-100/90 backdrop-blur-sm">
       <h2 className="text-3xl font-bold font-sans tracking-tight">ManglarIA</h2>
@@ -27,7 +19,7 @@ export default function Sidebar() {
       <br />
       <div>
         {categories.map((category, index) => (
-          <div key={index} className="text-black pb-2">
+          <div key={index} className="text-black pb-2 select-none capitalize">
             <input
               type="checkbox"
               className="hidden"
@@ -72,9 +64,7 @@ export default function Sidebar() {
           </div>
         ))}
       </div>
-      <p className="mt-2 text-sm text-gray-400">
-        [click to toggle sensor types]
-      </p>
+      <p className="mt-2 text-sm text-gray-400">[click to show details]</p>
       <br />
       <details className="text-gray-500">
         <summary className="cursor-pointer hover:text-gray-700">About</summary>
