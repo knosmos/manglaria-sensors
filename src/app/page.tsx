@@ -22,7 +22,7 @@ declare global {
 }
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-const center: [number, number] = [-87.8, 21.5];
+const center: [number, number] = [-105.45, 22.05]; // CHANGE TO SET MAP INITIAL LOCATION
 
 const Map = () => {
   const mapRef = React.useRef<mapboxgl.Map | null>(null);
@@ -33,13 +33,13 @@ const Map = () => {
         window.selectedSensors || sensorTypes.map((type) => type.toLowerCase());
       const map_object = new mapboxgl.Map({
         container: "map",
-        style:
+        style: // CHANGE TO SET MAP STYLE
           "mapbox://styles/jieruei/cmdqg6l5i024g01sadq52c3cb?optimize=true",
         center: center,
         zoom: 10,
       });
       mapRef.current = map_object;
-      window.mapboxMap = map_object; // Expose map object globally for debugging
+      window.mapboxMap = map_object;
       map_object.on("load", async () => {
         createMarkers();
       });

@@ -14,7 +14,7 @@ export default function Sidebar() {
   return (
     <div className="font-mono absolute top-5 right-5 box-border p-2 md:p-4 shadow-lg rounded-full md:rounded-xl max-w-100 text-black z-5 bg-radial from-gray-100/80 from-20% to-gray-100/90 backdrop-blur-sm">
       <div className="hidden md:block">
-        <h2 className="text-4xl font-sans uppercase">ManglarIA</h2>
+        <h2 className="text-4xl font-sans uppercase tracking-wide">ManglarIA</h2>
         <hr />
         <p className="tracking-widest text-sm font-mono">
           SENSOR INVENTORY /////

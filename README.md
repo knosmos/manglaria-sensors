@@ -3,6 +3,11 @@
 <img width="2865" height="1532" alt="image" src="https://github.com/user-attachments/assets/fb54b7df-6e65-4d46-bbb9-f8334e3bee36" />
 Deployment: https://manglaria-sensors.vercel.app/
 
+## Setup
+```console
+npm i
+```
+
 ## Run development server
 
 ```console
