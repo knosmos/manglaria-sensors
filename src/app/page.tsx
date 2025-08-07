@@ -10,6 +10,7 @@ import { sensorTypes } from "./sensor_types";
 import { createMarkers } from "./marker_load";
 import { create } from "domain";
 import Viewsetter from "./viewsetter";
+import SplashScreen from "./splash";
 
 declare global {
   interface Window {
@@ -46,6 +47,7 @@ const Map = () => {
   }, []);
   return (
     <div>
+      <SplashScreen />
       <div id="map" style={{ width: "100%", height: "100vh" }}></div>
       <Sidebar />
       <Viewsetter />

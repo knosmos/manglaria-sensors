@@ -7,7 +7,7 @@ declare global {
 
 export default function Viewsetter() {
   const box_style =
-    "font-mono uppercase box-border p-2 shadow-lg rounded-xl text-center max-w-100 text-white z-5 cursor-pointer text-xs w-45 hover:bg-amber-800 hover:scale-103 transition-transform duration-200";
+    "hidden md:block font-mono uppercase box-border p-2 shadow-lg rounded-xl text-center max-w-100 text-white z-5 cursor-pointer text-xs w-45 hover:bg-amber-800 hover:scale-103 transition-transform duration-200";
   return (
     <div className="absolute bottom-5 left-5 flex flex-row gap-3 box-border p-2 shadow-lg rounded-lg z-5 bg-radial from-gray-100/30 from-20% to-gray-100/50 backdrop-blur-sm">
       <div

@@ -73,8 +73,8 @@ export async function createMarkers() {
     }).setMaxWidth("100%").setHTML(`
         <div class="font-mono text-black">
           <!--<img src="${imgPath}" alt="${sensor.Sensor} Icon" class="mb-2 rounded-md max-w-80" onerror="this.onerror=null; this.style.display='none';">-->
-          <h2 class="text-lg uppercase"><b>${sensor.Sensor}</b></h2>
-          <h3 class="font-mono text-lg">${sensor["Site code"]}</h3>
+          <h2 class="text-3xl uppercase font-sans">${sensor.Sensor}</h2>
+          <h3 class="font-mono tracking-widest">${sensor["Site code"]}</h3>
           <hr>
           <p class="uppercase tracking-widest">${sensor.Location} /////</p>
           <br>

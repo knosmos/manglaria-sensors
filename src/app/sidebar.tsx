@@ -14,9 +14,9 @@ export default function Sidebar() {
   return (
     <div className="font-mono absolute top-5 right-5 box-border p-2 md:p-4 shadow-lg rounded-full md:rounded-xl max-w-100 text-black z-5 bg-radial from-gray-100/80 from-20% to-gray-100/90 backdrop-blur-sm">
       <div className="hidden md:block">
-        <h2 className="text-3xl font-bold font-sans tracking-tight">ManglarIA</h2>
+        <h2 className="text-4xl font-sans uppercase">ManglarIA</h2>
         <hr/>
-        <p className="tracking-widest text-sm">SENSOR INVENTORY /////</p>
+        <p className="tracking-widest text-sm font-mono">SENSOR INVENTORY /////</p>
         <br />
       </div>
       <div>
@@ -81,7 +81,6 @@ export default function Sidebar() {
             </a>
             : Using artificial intelligence to save mangroves in a changing
             climate
-            <hr />
             <br />
             dashboard v0.1.0 by{" "}
             <a
