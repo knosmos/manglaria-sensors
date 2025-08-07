@@ -19,8 +19,8 @@ export default function SplashScreen() {
 
     return (
         <div className={`fixed inset-0 flex flex-col items-center justify-center z-50 bg-gray-300 text-black transition-opacity duration-500 ease-in-out ${fadeoutStarted ? 'opacity-0' : 'opacity-100'}`}>
-        <h1 className="text-8xl font-sans tracking-widest">MANGLARIA</h1>
-        <p className="text-xl font-mono mt-4 tracking-widest">LOADING MAP ///////////</p>
+        <h1 className="text-4xl md:text-8xl font-sans tracking-widest">MANGLARIA</h1>
+        <p className="md:text-xl font-mono mt-4 tracking-widest">LOADING MAP ///////////</p>
         </div>
     );
     }

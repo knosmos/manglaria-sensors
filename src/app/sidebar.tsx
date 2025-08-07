@@ -82,7 +82,7 @@ export default function Sidebar() {
             : Using artificial intelligence to save mangroves in a changing
             climate
             <br />
-            dashboard v0.1.0 by{" "}
+            dashboard v0.1.2 by{" "}
             <a
               href="https://github.com/knosmos"
               className="text-purple-800 hover:underline"
