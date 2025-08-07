@@ -17,4 +17,9 @@ npm run build
 ```
 
 ## Editing
-This app reads sensor data from the CSV at `public/sensor_coords.csv`. You can edit this file to add or remove sensors. To add new sensor types, you can must add the name to the `src/app/sensor_types.ts` file and upload an icon to the `public/sensor-icons` directory. The icons should be named according to the sensor type, e.g., `current-profiler.png`. The sidebar contents can be modified in the `src/app/sidebar.tsx` file. The map can be customized by changing the style URL in `src/app/page.tsx`.
+* This app reads sensor data from the CSV at `public/sensor_coords.csv`; you can edit this file to add or remove sensors. To add new sensor types, you must add the name to the `src/app/sensor_types.ts` file and upload an icon to the `public/sensor-icons` directory. The icons should be named according to the sensor type, e.g., `current-profiler.png`.
+* The sidebar contents can be modified in the `src/app/sidebar.tsx` file.
+* The map can be customized by changing the style URL in `src/app/page.tsx`.
+
+## Contact
+Jieruei Chang (jieruei@mit.edu)
