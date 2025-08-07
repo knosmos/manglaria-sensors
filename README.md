@@ -1,17 +1,20 @@
 # ManglarIA Sensor Inventory
 
-<img width="2306" height="1468" alt="image" src="https://github.com/user-attachments/assets/af403333-bfcb-434e-bf19-e6f31c4fd7ab" />
+<img width="2865" height="1532" alt="image" src="https://github.com/user-attachments/assets/fb54b7df-6e65-4d46-bbb9-f8334e3bee36" />
 Deployment: https://manglaria-sensors.vercel.app/
 
 ## Run development server
 
-```
+```console
 npm run dev
 ```
 
 ## Build for production
 
-```
+```console
 npx prettier . --write
 npm run build
 ```
+
+## Editing
+This app reads sensor data from the CSV at `public/sensor_coords.csv`. You can edit this file to add or remove sensors. To add new sensor types, you can must add the name to the `src/app/sensor_types.ts` file and upload an icon to the `public/sensor-icons` directory. The icons should be named according to the sensor type, e.g., `current-profiler.png`. The sidebar contents can be modified in the `src/app/sidebar.tsx` file. The map can be customized by changing the style URL in `src/app/page.tsx`.

@@ -67,11 +67,11 @@ export default function Sidebar() {
         ))}
       </div>
       <div className="hidden md:block">
-        <p className="mt-2 text-sm text-gray-400">[click to explore]</p>
         <br />
         <details className=" text-gray-500">
           <summary className="cursor-pointer hover:text-gray-700">About</summary>
           <div className="text-sm">
+            <p>Click icons above to toggle sensor types. Click icons on map to show details.</p>
             <br />
             <a
               className="text-purple-800 hover:underline"
