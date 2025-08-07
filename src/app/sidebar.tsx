@@ -15,8 +15,10 @@ export default function Sidebar() {
     <div className="font-mono absolute top-5 right-5 box-border p-2 md:p-4 shadow-lg rounded-full md:rounded-xl max-w-100 text-black z-5 bg-radial from-gray-100/80 from-20% to-gray-100/90 backdrop-blur-sm">
       <div className="hidden md:block">
         <h2 className="text-4xl font-sans uppercase">ManglarIA</h2>
-        <hr/>
-        <p className="tracking-widest text-sm font-mono">SENSOR INVENTORY /////</p>
+        <hr />
+        <p className="tracking-widest text-sm font-mono">
+          SENSOR INVENTORY /////
+        </p>
         <br />
       </div>
       <div>
@@ -69,9 +71,14 @@ export default function Sidebar() {
       <div className="hidden md:block">
         <br />
         <details className=" text-gray-500">
-          <summary className="cursor-pointer hover:text-gray-700">About</summary>
+          <summary className="cursor-pointer hover:text-gray-700">
+            About
+          </summary>
           <div className="text-sm">
-            <p>Click icons above to toggle sensor types. Click icons on map to show details.</p>
+            <p>
+              Click icons above to toggle sensor types. Click icons on map to
+              show details.
+            </p>
             <br />
             <a
               className="text-purple-800 hover:underline"
